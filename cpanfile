@@ -1,11 +1,10 @@
-requires "Kossy", 0.19;
-requires "DBIx::Sunny";
-requires "JSON::XS";
-requires "Digest::SHA";
-requires "File::Temp";
-requires "Time::Piece";
-
-requires "DBD::mysql";
-requires "Starman";
-requires "Plack::Session";
-requires "Cache::Memcached::Fast";
+requires 'Cache::Memcached::Fast';
+requires 'DBD::mysql';
+requires 'DBIx::Sunny';
+requires 'Digest::SHA';
+requires 'File::Temp';
+requires 'JSON::XS';
+requires 'Kossy';
+requires 'Plack::Session';
+requires 'Starman';
+requires 'Time::Piece';
