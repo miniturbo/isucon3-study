@@ -3,6 +3,7 @@ requires 'DBD::mysql';
 requires 'DBIx::Sunny';
 requires 'Digest::SHA';
 requires 'File::Temp';
+requires 'Gazelle';
 requires 'JSON::XS';
 requires 'Kossy';
 requires 'Plack::Middleware::Session::Simple';
