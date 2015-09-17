@@ -112,7 +112,8 @@ get '/' => [qw(session get_user)] => sub {
         FROM memos m
         JOIN users u ON m.user = u.id
         WHERE m.is_private = 0
-        ORDER BY m.created_at DESC, m.id DESC LIMIT 100
+        ORDER BY m.created_at DESC, m.id DESC
+        LIMIT 100
     });
     $c->render('index.tx', {
         memos => $memos,
@@ -127,12 +128,13 @@ get '/recent/:page' => [qw(session get_user)] => sub {
     my $total = $self->dbh->select_one(
         'SELECT count(*) FROM memos WHERE is_private=0'
     );
-    my $memos = $self->dbh->select_all(q{
+    my $memos = $self->dbh->select_all(sprintf q{
         SELECT m.id, m.content, m.is_private, m.created_at, u.username
         FROM memos m
         JOIN users u ON m.user = u.id
         WHERE m.is_private = 0
-        ORDER BY m.created_at DESC, m.id DESC LIMIT 100 OFFSET %d
+        ORDER BY m.created_at DESC, m.id DESC
+        LIMIT 100 OFFSET %d
     }, $page * 100);
     if ( @$memos == 0 ) {
         return $c->halt(404);
