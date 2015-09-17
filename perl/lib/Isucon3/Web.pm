@@ -236,43 +236,31 @@ get '/memo/:id' => [qw(session get_user)] => sub {
     my ($self, $c) = @_;
 
     my $user = $c->stash->{user};
-    my $memo = $self->dbh->select_row(
-        'SELECT id, user, content, is_private, created_at, updated_at FROM memos WHERE id=?',
-        $c->args->{id},
-    );
-    unless ($memo) {
-        $c->halt(404);
-    }
+    my $memo = $self->dbh->select_row(q{
+        SELECT m.id, m.content, m.is_private, m.created_at, m.updated_at, u.id AS user_id, u.username
+        FROM memos m
+        STRAIGHT_JOIN users u ON m.user = u.id
+        WHERE m.id = ?
+    }, $c->args->{id});
+    $c->halt(404) unless $memo;
+
     if ($memo->{is_private}) {
-        if ( !$user || $user->{id} != $memo->{user} ) {
+        if (!$user || $user->{id} != $memo->{user_id}) {
             $c->halt(404);
         }
     }
+
     $memo->{content_html} = markdown($memo->{content});
-    $memo->{username} = $self->dbh->select_one(
-        'SELECT username FROM users WHERE id=?',
-        $memo->{user},
-    );
 
-    my $cond;
-    if ($user && $user->{id} == $memo->{user}) {
-        $cond = "";
-    }
-    else {
-        $cond = "AND is_private=0";
-    }
+    my $cond = ($user and $user->{id} == $memo->{user_id}) ? "" : "AND is_private = 0";
 
-    my $memos = $self->dbh->select_all(
-        "SELECT * FROM memos WHERE user=? $cond ORDER BY id",
-        $memo->{user},
-    );
-    my ($newer, $older);
-    for my $i ( 0 .. scalar @$memos - 1 ) {
-        if ( $memos->[$i]->{id} eq $memo->{id} ) {
-            $older = $memos->[ $i - 1 ] if $i > 0;
-            $newer = $memos->[ $i + 1 ] if $i < @$memos;
-        }
-    }
+    my $older = $self->dbh->select_row(qq{
+        SELECT id FROM memos WHERE id < ? AND user = ? $cond ORDER BY id DESC LIMIT 1
+    }, $memo->{id}, $memo->{user_id});
+
+    my $newer = $self->dbh->select_row(qq{
+        SELECT id FROM memos WHERE id > ? AND user = ? $cond ORDER BY id ASC LIMIT 1
+    }, $memo->{id}, $memo->{user_id});
 
     $c->render('memo.tx', {
         memo  => $memo,
