@@ -66,13 +66,6 @@ DISTRIBUTIONS
       strict 0
       version 0.88
       warnings 0
-  Cache-Memcached-Fast-0.23
-    pathname: K/KR/KROKI/Cache-Memcached-Fast-0.23.tar.gz
-    provides:
-      Cache::Memcached::Fast 0.23
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Cache-Redis-0.13
     pathname: S/SO/SONGMU/Cache-Redis-0.13.tar.gz
     provides:
@@ -1121,14 +1114,6 @@ DISTRIBUTIONS
       Time::HiRes 0
       Try::Tiny 0
       perl 5.008001
-  Redis-Jet-0.05
-    pathname: K/KA/KAZEBURO/Redis-Jet-0.05.tar.gz
-    provides:
-      Redis::Jet 0.05
-    requirements:
-      Devel::CheckCompiler 0.04
-      Module::Build 0.38
-      perl 5.008005
   Router-Boom-1.02
     pathname: T/TO/TOKUHIROM/Router-Boom-1.02.tar.gz
     provides:
