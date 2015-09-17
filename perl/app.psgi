@@ -4,8 +4,6 @@ use lib "$FindBin::Bin/lib";
 use File::Basename;
 use Plack::Builder;
 use Isucon3::Web;
-use Plack::Session::Store::Cache;
-use Plack::Session::State::Cookie;
 use Cache::Memcached::Fast;
 
 my $root_dir = File::Basename::dirname(__FILE__);
@@ -16,16 +14,9 @@ builder {
     enable 'Static',
         path => qr!^/(?:(?:css|js|img)/|favicon\.ico$)!,
         root => $root_dir . '/public';
-    enable 'Session',
-        store => Plack::Session::Store::Cache->new(
-            cache => Cache::Memcached::Fast->new({
-                servers => [ "localhost:11211" ],
-            }),
-        ),
-        state => Plack::Session::State::Cookie->new(
-            httponly    => 1,
-            session_key => "isucon_session",
-        ),
-    ;
+    enable 'Session::Simple',
+        store       => Cache::Memcached::Fast->new({ servers => ['localhost:11211'] }),
+        cookie_name => 'isucon_session',
+        httponly    => 1;
     $app;
 };

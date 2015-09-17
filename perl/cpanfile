@@ -5,6 +5,6 @@ requires 'Digest::SHA';
 requires 'File::Temp';
 requires 'JSON::XS';
 requires 'Kossy';
-requires 'Plack::Session';
+requires 'Plack::Middleware::Session::Simple';
 requires 'Starman';
 requires 'Time::Piece';

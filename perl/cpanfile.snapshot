@@ -347,17 +347,6 @@ DISTRIBUTIONS
       Filter::Util::Call 0
       Test::More 0
       perl 5.008001
-  Digest-HMAC-1.03
-    pathname: G/GA/GAAS/Digest-HMAC-1.03.tar.gz
-    provides:
-      Digest::HMAC 1.03
-      Digest::HMAC_MD5 1.01
-      Digest::HMAC_SHA1 1.03
-    requirements:
-      Digest::MD5 2
-      Digest::SHA 1
-      ExtUtils::MakeMaker 0
-      perl 5.004
   Digest-SHA1-2.13
     pathname: G/GA/GAAS/Digest-SHA1-2.13.tar.gz
     provides:
@@ -969,26 +958,23 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  Plack-Middleware-Session-0.30
-    pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.30.tar.gz
+  Plack-Middleware-Session-Simple-0.03
+    pathname: K/KA/KAZEBURO/Plack-Middleware-Session-Simple-0.03.tar.gz
     provides:
-      Plack::Middleware::Session 0.30
-      Plack::Middleware::Session::Cookie undef
-      Plack::Session 0.30
-      Plack::Session::Cleanup 0.30
-      Plack::Session::State 0.30
-      Plack::Session::State::Cookie 0.30
-      Plack::Session::Store 0.30
-      Plack::Session::Store::Cache 0.30
-      Plack::Session::Store::DBI 0.30
-      Plack::Session::Store::File 0.30
-      Plack::Session::Store::Null 0.30
+      Plack::Middleware::Session::Simple 0.03
+      Plack::Middleware::Session::Simple::Session undef
     requirements:
-      Cookie::Baker 0
-      Digest::HMAC_SHA1 1.03
-      Digest::SHA1 0
-      Module::Build::Tiny 0.039
-      Plack 0.9910
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Cookie::Baker 0.02
+      Digest::SHA1 2.13
+      ExtUtils::CBuilder 0
+      Module::Build 0.38
+      Plack 1.0029
+      Scalar::Util 0
+      Tie::Hash 0
+      parent 0.223
+      perl 5.008005
   Router-Boom-1.02
     pathname: T/TO/TOKUHIROM/Router-Boom-1.02.tar.gz
     provides:
