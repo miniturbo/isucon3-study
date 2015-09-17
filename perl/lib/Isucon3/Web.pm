@@ -107,15 +107,13 @@ get '/' => [qw(session get_user)] => sub {
     my $total = $self->dbh->select_one(
         'SELECT count(*) FROM memos WHERE is_private=0'
     );
-    my $memos = $self->dbh->select_all(
-        'SELECT * FROM memos WHERE is_private=0 ORDER BY created_at DESC, id DESC LIMIT 100',
-    );
-    for my $memo (@$memos) {
-        $memo->{username} = $self->dbh->select_one(
-            'SELECT username FROM users WHERE id=?',
-            $memo->{user},
-        );
-    }
+    my $memos = $self->dbh->select_all(q{
+        SELECT m.id, m.content, m.is_private, m.created_at, u.username
+        FROM memos m
+        JOIN users u ON m.user = u.id
+        WHERE m.is_private = 0
+        ORDER BY m.created_at DESC, m.id DESC LIMIT 100
+    });
     $c->render('index.tx', {
         memos => $memos,
         page  => 0,
@@ -129,19 +127,17 @@ get '/recent/:page' => [qw(session get_user)] => sub {
     my $total = $self->dbh->select_one(
         'SELECT count(*) FROM memos WHERE is_private=0'
     );
-    my $memos = $self->dbh->select_all(
-        sprintf("SELECT * FROM memos WHERE is_private=0 ORDER BY created_at DESC, id DESC LIMIT 100 OFFSET %d", $page * 100)
-    );
+    my $memos = $self->dbh->select_all(q{
+        SELECT m.id, m.content, m.is_private, m.created_at, u.username
+        FROM memos m
+        JOIN users u ON m.user = u.id
+        WHERE m.is_private = 0
+        ORDER BY m.created_at DESC, m.id DESC LIMIT 100 OFFSET %d
+    }, $page * 100);
     if ( @$memos == 0 ) {
         return $c->halt(404);
     }
 
-    for my $memo (@$memos) {
-        $memo->{username} = $self->dbh->select_one(
-            'SELECT username FROM users WHERE id=?',
-            $memo->{user},
-        );
-    }
     $c->render('index.tx', {
         memos => $memos,
         page  => $page,
