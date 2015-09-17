@@ -110,7 +110,7 @@ get '/' => [qw(session get_user)] => sub {
     my $memos = $self->dbh->select_all(q{
         SELECT m.id, m.content, m.is_private, m.created_at, u.username
         FROM memos m
-        JOIN users u ON m.user = u.id
+        STRAIGHT_JOIN users u ON m.user = u.id
         WHERE m.is_private = 0
         ORDER BY m.created_at DESC, m.id DESC
         LIMIT 100
@@ -131,7 +131,7 @@ get '/recent/:page' => [qw(session get_user)] => sub {
     my $memos = $self->dbh->select_all(sprintf q{
         SELECT m.id, m.content, m.is_private, m.created_at, u.username
         FROM memos m
-        JOIN users u ON m.user = u.id
+        STRAIGHT_JOIN users u ON m.user = u.id
         WHERE m.is_private = 0
         ORDER BY m.created_at DESC, m.id DESC
         LIMIT 100 OFFSET %d
