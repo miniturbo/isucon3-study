@@ -7,5 +7,6 @@ requires 'Gazelle';
 requires 'JSON::XS';
 requires 'Kossy';
 requires 'Plack::Middleware::Session::Simple';
+requires 'Server::Starter';
 requires 'Starman';
 requires 'Time::Piece';
