@@ -73,6 +73,15 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  Cache-Redis-0.13
+    pathname: S/SO/SONGMU/Cache-Redis-0.13.tar.gz
+    provides:
+      Cache::Redis 0.13
+    requirements:
+      Module::Build 0.38
+      Module::Load 0
+      Redis 0
+      perl 5.008001
   Class-Accessor-Lite-0.08
     pathname: K/KA/KAZUHO/Class-Accessor-Lite-0.08.tar.gz
     provides:
@@ -439,6 +448,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.11
       File::Spec 0
       IO::Dir 0
+  File-Which-1.19
+    pathname: P/PL/PLICEASE/File-Which-1.19.tar.gz
+    provides:
+      File::Which 1.19
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.006
   Filesys-Notify-Simple-0.12
     pathname: M/MI/MIYAGAWA/Filesys-Notify-Simple-0.12.tar.gz
     provides:
@@ -620,6 +636,21 @@ DISTRIBUTIONS
       Encode 2.10
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
+  IO-Socket-Timeout-0.31
+    pathname: D/DA/DAMS/IO-Socket-Timeout-0.31.tar.gz
+    provides:
+      IO::Socket::Timeout 0.31
+      IO::Socket::Timeout::Role::PerlIO 0.31
+      IO::Socket::Timeout::Role::SetSockOpt 0.31
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::Handle 0
+      IPC::Open3 0
+      Module::Build::Tiny 0.039
+      PerlIO::via::Timeout 0.32
+      Test::More 0
+      Test::TCP 0
   IPC-Signal-1.00
     pathname: R/RO/ROSCH/IPC-Signal-1.00.tar.gz
     provides:
@@ -915,6 +946,21 @@ DISTRIBUTIONS
       Test::Requires 0
       Test::SharedFork 0
       perl 5.008001
+  PerlIO-via-Timeout-0.32
+    pathname: D/DA/DAMS/PerlIO-via-Timeout-0.32.tar.gz
+    provides:
+      PerlIO::via::Timeout 0.32
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::Handle 0
+      IPC::Open3 0
+      Module::Build::Tiny 0.039
+      PerlIO::via 0
+      Test::More 0
+      Test::TCP 0
+      Time::HiRes 0
   Plack-1.0037
     pathname: M/MI/MIYAGAWA/Plack-1.0037.tar.gz
     provides:
@@ -1048,6 +1094,41 @@ DISTRIBUTIONS
       Proc::Wait3 0.04
     requirements:
       ExtUtils::MakeMaker 0
+  Redis-1.980
+    pathname: D/DA/DAMS/Redis-1.980.tar.gz
+    provides:
+      Redis 1.980
+      Redis::Hash 1.980
+      Redis::List 1.980
+      Redis::Sentinel 1.980
+    requirements:
+      ExtUtils::MakeMaker 6.63_03
+      IO::Socket::Timeout 0.29
+      Module::Build::Tiny 0.039
+      Try::Tiny 0
+      perl 5.008
+  Redis-Fast-0.16
+    pathname: S/SH/SHOGO/Redis-Fast-0.16.tar.gz
+    provides:
+      Redis::Fast 0.16
+      Redis::Fast::Hash undef
+      Redis::Fast::List undef
+      Redis::Fast::Sentinel undef
+    requirements:
+      File::Which 0
+      Module::Build 0.38
+      Module::Build::XSUtil 0.02
+      Time::HiRes 0
+      Try::Tiny 0
+      perl 5.008001
+  Redis-Jet-0.05
+    pathname: K/KA/KAZEBURO/Redis-Jet-0.05.tar.gz
+    provides:
+      Redis::Jet 0.05
+    requirements:
+      Devel::CheckCompiler 0.04
+      Module::Build 0.38
+      perl 5.008005
   Router-Boom-1.02
     pathname: T/TO/TOKUHIROM/Router-Boom-1.02.tar.gz
     provides:
