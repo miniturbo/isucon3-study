@@ -5,7 +5,7 @@ use warnings;
 use utf8;
 use Kossy;
 use DBIx::Sunny;
-use JSON qw/ decode_json /;
+use JSON::XS qw/ decode_json /;
 use Digest::SHA qw/ sha256_hex /;
 use DBIx::Sunny;
 use File::Temp qw/ tempfile /;
